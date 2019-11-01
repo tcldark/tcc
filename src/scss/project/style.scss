@@ -1,0 +1,736 @@
+@import "./../common/mixins/index.scss";
+$colorMain: #008B8B;
+$colorPink: #4B0082;
+
+body {
+	overflow-x: hidden;
+}
+.is--logo {
+	font-size: 0!important;
+	background: url('../../../src/images/adocao-logo.png') center no-repeat;
+	background-size: 100%;
+	padding: 0!important;
+	@include rem(width, 140px);
+	@include rem(height, 40px);
+}
+
+.l-header {
+	@include breakpoint('mobile') {
+		cursor: pointer;
+		outline: none;
+		@include rem(height, 40px);
+		@include rem(padding, 6px 20px);
+	}
+	&__mobile {
+		background: #fff;
+		@include rem(width, 30px);
+		@include rem(height, 30px);
+		span {
+			display: block;
+			background: $colorPink;
+			height: 3px;
+			width: 100%;
+			@include rem(margin-bottom,5px);
+			@include rem(max-width, 20px);
+		}
+	}
+	&__items {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: rgba(255, 255, 255, 0.8);
+		position: fixed;
+		z-index: 5050;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transition: all ease 0.5s;
+		will-change: transform, transition;
+		-webkit-box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.32);
+		-moz-box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.32);
+		box-shadow: 0px 0px 24px 2px rgba(0,0,0,0.32);
+		@include rem(padding, 20px 20px);
+		@include breakpoint('mobile') {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #fff;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			transform: translateX(-150%);
+		}
+		&.is--active {
+			transform: translateX(0);
+		}
+		ul {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			@include breakpoint('mobile') {
+				flex-direction: column;
+			}
+			li {
+				a {
+					display: block;
+					color: #000;
+					@include rem(padding, 10px 15px);
+					@include rem(margin, 0 10px);
+					@include rem(font-size, 14px);
+					@include breakpoint('mobile') {
+						width: 100%;
+						@include rem(font-size, 16px);
+						@include rem(line-height, 40px);
+					}
+				}
+			}
+		}
+		&-last--btn {
+			background: $colorPink;
+			color: #fff!important;
+			@include breakpoint('mobile') {
+				color: #000!important;
+				background: #fff;
+			}
+		}
+		&-last--dog {
+			background: #ecb100;
+			color: #fff!important;
+		}
+		p {
+			color: $colorPink;
+			@include rem(line-height, 60px);
+			@include rem(font-size, 24px);
+		}
+		.js--close {
+			background: #fff;
+			position: absolute;
+			top: 30px;
+			right: 30px;
+			svg {
+				@include rem(width, 35px);
+				@include rem(height, 35px);
+			}
+		}
+	}
+}
+
+.l-footer {
+	background: $colorPink;
+	@include rem(margin-top, 80px);
+	@include rem(padding, 50px 5%);
+	&__items {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		@include breakpoint('mobile') {
+			flex-direction: column;
+		}
+		h3 {
+			color: #fff;
+			text-transform: uppercase;
+			@include rem(padding-bottom, 20px);
+			@include rem(font-size, 16px);
+		}
+		ul {
+			@include breakpoint('mobile') {
+				@include rem(margin-bottom, 30px);
+			}
+			&.is--share {
+				display: flex;
+			}
+			li {
+				a {
+					color: #fff;
+					@include rem(font-size, 14px);
+					@include rem(line-height, 25px);
+					svg {
+						@include rem(width, 40px);
+						@include rem(height, 40px);
+						@include rem(margin-right, 10px);
+						path {
+							fill: #fff;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.l-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	cursor: pointer;
+	z-index: 5051;
+	transition: all ease 0.4s;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	&.is--active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: initial;
+	}
+}
+
+.l-login {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	will-change: transform, transition;
+	transition: all ease 0.4s;
+	transform: translate(-50%, -50%) scale(0);
+	z-index: 5055;
+	background: #fff;
+	border-radius: 10px;
+	text-align: center;
+	transition: all ease 0.4s;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	@include rem(height, 400px);
+	@include rem(width, 600px);
+	@include rem(padding, 20px);
+	@include breakpoint('mobile') {
+		width: 90%;
+	}
+	&.is--active {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: initial;
+		transform: translate(-50%, -50%) scale(1);
+	}
+	&__close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		cursor: pointer;
+		svg {
+			@include rem(width, 30px);
+			@include rem(height, 30px);
+		}
+	}
+	&__form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		height: 100%;
+		label {
+			display: block;
+			width: 100%;
+			max-width: 80%;
+			p {
+				display: block;
+				color: #000;
+				width: 100%;
+				text-align: left;
+				@include rem(padding-bottom, 10px);
+				@include rem(font-size, 13px);
+			}
+		}
+	}
+	&__info {
+		display: block;
+		text-align: left;
+		color: indigo;
+		font-family: "Fredoka One",cursive;
+		max-width: 80%;
+		width: 100%;
+		@include rem(font-size, 22px);
+		@include rem(padding-bottom, 40px);
+	}
+	&__submit {
+		background: #ecb100;
+		font-family: "Fredoka One",cursive;
+		color: #fff;
+		text-transform: uppercase;
+		cursor: pointer;
+		outline: none;
+		max-width: 40%;
+		width: 100%;
+		margin: 0 auto 30px;
+		letter-spacing: 1px;
+		@include rem(font-size, 14px);
+		@include rem(height, 40px);
+		@include rem(line-height, 40px);
+	}
+	&__input {
+		border: 1px solid #ddd;
+		color: #000;
+		display: block;
+		width: 100%;
+		transition: 0.4s;
+		max-width: 100%;
+		outline: none;
+		@include rem(padding, 0 15px);
+		@include rem(margin, 0 auto 20px);
+		@include rem(height, 40px);
+		@include rem(line-height, 40px);
+		@include rem(font-size, 13px);
+		&:hover,
+		&:focus {
+			background: #f4f4f4;
+			border: 1px solid indigo;
+		}
+	}
+	&__link {
+		display: block;
+		width: 100%;
+		max-width: 80%;
+		color: indigo;
+		text-align: left;
+		@include rem(font-size, 14px);
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.l-main {
+}
+
+.l-banner {
+	figure {
+		margin: 0;
+		padding: 0;
+		img {
+			display: block;
+			width: 100%;
+			height: auto;	
+		}
+	}
+}
+
+.l-search {
+	background: #FFE4B5;
+	max-width: 90%;
+	width: 100%;
+	border-radius: 10px;
+	margin: 0 auto;
+	will-change: transform;
+	transform: translateY(-50px);
+	@include rem(padding, 40px 50px);
+	@include breakpoint('mobile') {
+		transform: translateY(0);
+		@include rem(padding, 40px 20px);
+		@include rem(margin, 30px auto);
+	}
+	h2 {
+		display: block;
+		text-align: center;
+		width: 100%;
+		font-weight: 600;
+		color: $colorPink;
+		@include rem(padding-bottom, 40px);
+		@include rem(font-size, 40px);
+		@include breakpoint('mobile') {
+			@include rem(font-size, 20px);
+		}
+	}
+	&__items {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		@include rem(margin-bottom, 30px);
+		@include breakpoint('mobile') {
+			flex-direction: column;
+			margin: 0;
+		}
+		label {
+			width: 100%;
+			max-width: 48%;
+			@include breakpoint('mobile') {
+				max-width: 100%;
+				@include rem(margin-bottom, 20px);
+			}
+			select {
+				background: url('../../../src/images/arrow-select.png') center right 3% #fff no-repeat;
+				background-size: 3%;
+				cursor: pointer;
+				outline: none;
+				transition: all ease 0.5s;
+				width: 100%;
+				@include rem(padding, 0 30px);
+				@include rem(font-size, 13px);
+				@include rem(height, 40px);
+				@include rem(line-height, 40px);
+				@include breakpoint('mobile') {
+					background: url('../../../src/images/arrow-select.png') center right 6% #fff no-repeat;
+					background-size: 6%;
+				}
+				&:hover {
+					background: url('../../../src/images/arrow-select.png') center right 3% #f4f4f4 no-repeat;
+					background-size: 3%;
+				}
+			}
+		}
+	}
+	&__submit {
+		input {
+			background: $colorPink;
+			color: #fff;
+			width: 100%;
+			margin: 0 auto;
+			display: block;
+			text-transform: uppercase;
+			font-weight: 600;
+			letter-spacing: 2px;
+			cursor: pointer;
+			transition: 0.5s;
+			@include rem(margin-top, 20px);
+			@include rem(font-size, 13px);
+			@include rem(height, 45px);
+			@include rem(line-height, 45px);
+			@include rem(max-width, 300px);
+		}
+	}
+}
+
+.l-dogs {
+	padding: 0 5%;
+	h2 {
+		display: block;
+		text-align: center;
+		width: 100%;
+		font-weight: 600;
+		color: $colorPink;
+		@include rem(padding-bottom, 40px);
+		@include rem(font-size, 40px);
+	}
+	p {
+		display: block;
+		color: #000;
+		text-align: center;
+		@include rem(font-size, 12px);
+		@include rem(line-height, 20px);
+		@include rem(padding-bottom, 30px);
+	}
+	ul {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		@include breakpoint('mobile') {
+			flex-direction: column;
+		}
+		li {
+			width: 22%;
+			@include rem(margin-bottom, 30px);
+			@include breakpoint('mobile') {
+				width: 100%;
+			}
+			&:hover {
+				img {
+					transform: scale(1.06);
+				}
+			}
+			figure {
+				padding: 0;
+				margin: 0;
+				overflow: hidden;
+				@include rem(min-height, 191px);
+				img {
+					display: block;
+					width: 100%;
+					height: auto;
+					transition: all ease 0.5s;
+					will-change: transform, transition;
+				}
+			}
+			h3 {
+				display: block;
+				text-align: center;
+				@include rem(font-size, 14px);
+				@include rem(line-height, 20px);
+				@include rem(padding-top, 10px);
+			}
+			.js--state-dog {
+				display: block;
+				color: #000;
+				text-align: center;
+				@include rem(font-size, 13px);
+				@include rem(padding, 10px 0 20px);
+			}
+			.js--size-dog {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				button {
+					border: 1px solid #000;
+					display: block;
+					text-align: center;
+					transition: 0.5s;
+					cursor: pointer;
+					opacity: 0.3;
+					pointer-events: none;
+					background: #f4f4f4;
+					outline: none;
+					@include rem(margin-right, 10px);
+					@include rem(width, 30px);
+					@include rem(height, 30px);
+					@include rem(line-height, 30px);
+					@include rem(font-size, 13px);
+					&:hover,
+					&.is--active {
+						background: #000;
+						color: #fff;
+						opacity: 1;
+						pointer-events: initial;
+					}
+				}
+			}
+		}
+	}
+}
+
+.l-register {
+	@include rem(margin-top, 150px);
+	@include breakpoint('mobile') {
+		@include rem(margin-top, 50px);
+	}
+	&__form {
+		max-width: 60%;
+		width: 100%;
+		margin: 0 auto;
+		@include breakpoint('mobile') {
+			max-width: 90%;
+		}
+		h3 {
+			font-family: "Fredoka One",cursive;
+			color: indigo;
+			display: block;
+			@include rem(margin-bottom, 20px);
+			@include rem(font-size, 34px);
+			@include breakpoint('mobile') {
+				text-align: center;
+			}
+		}
+		p {
+			color: #000;
+			display: block;
+			@include rem(margin-bottom, 90px);
+			@include rem(font-size, 14px);
+			@include rem(line-height, 24px);
+			@include breakpoint('mobile') {
+				text-align: center;
+				@include rem(margin-bottom, 30px);
+			}
+		}
+		label {
+			display: flex;
+			align-items: center;
+			@include breakpoint('mobile') {
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+			}
+			@include rem(margin-bottom, 10px);
+			p {
+				margin-bottom: 0;
+				@include rem(width, 230px);
+				@include rem(font-size, 14px);
+				@include rem(margin-right, 10px);
+				@include breakpoint('mobile') {
+					width: 100%;
+					margin-right: 0;
+					text-align: left;
+				}
+			}
+			input[type='text'],
+			input[type='tel'],
+			input[type='email'],
+			input[type='password'],
+			textarea {
+				border: 1px solid #ddd;
+				color: #000;
+				display: block;
+				width: 100%;
+				transition: 0.4s;
+				width: 72%;
+				outline: none;
+				@include rem(padding, 0 15px);
+				@include rem(height, 40px);
+				@include rem(line-height, 40px);
+				@include rem(font-size, 13px);
+				@include breakpoint('mobile') {
+					width: 100%;
+				}
+				&:hover,
+				&:focus {
+					background: #f4f4f4;
+					border: 1px solid indigo;
+				}
+			}
+			textarea {
+				@include rem(height, 100px);
+			}
+			input[type='radio'] {
+				border: 1px solid #ddd;
+				outline: none;
+				cursor: pointer;
+				@include rem(width, 15px);
+				@include rem(height, 15px);
+				&:checked {
+					background: indigo;
+				}
+			}
+			strong {
+				color: red;
+			}
+		}
+		input[type='submit'] {
+			background: #ecb100;
+			font-family: "Fredoka One",cursive;
+			color: #fff;
+			text-transform: uppercase;
+			cursor: pointer;
+			outline: none;
+			max-width: 28%;
+			width: 100%;
+			margin: 30px auto 0;
+			letter-spacing: 1px;
+			@include rem(font-size, 14px);
+			@include rem(height, 40px);
+			@include rem(line-height, 40px);
+			@include breakpoint('mobile') {
+				max-width: 100%;
+				@include rem(height, 50px);
+				@include rem(line-height, 50px);
+			}
+		}
+	}
+}
+
+.l-dog {
+	&__container {
+		padding: 0 2%;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		@include rem(margin-top, 120px);
+		@include breakpoint('mobile') {
+			flex-direction: column;
+			padding: 0 5%;
+			margin-top: 0;
+		}
+	}
+	&__left {
+		max-width: 60%;
+		width: 100%;
+		@include breakpoint('mobile') {
+			max-width: 100%;
+		}
+		figure {
+			margin: 0;
+		}
+	}
+	&__right {
+		max-width: 35%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		flex-direction: column;
+		@include breakpoint('mobile') {
+			max-width: 100%;
+		}
+		&-name {
+			text-transform: uppercase;
+			color: #000;
+			display: block;
+			@include rem(padding-bottom, 15px);
+			@include rem(font-size, 30px);
+		}
+		&-description {
+			display: block;
+			color: #000;
+			border-bottom: 1px solid #ccc;
+			@include rem(font-size, 14px);
+			@include rem(line-height, 22px);
+			@include rem(padding-bottom, 30px);
+			@include rem(margin-bottom, 30px);
+		}
+	}
+	&__items {
+		display: block;
+		width: 100%;
+		&-item {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			width: 100%;
+			@include rem(padding-bottom, 5px);
+			strong {
+				display: block;
+				width: 70px;
+				@include rem(font-size, 16px);
+			}
+			p {
+				display: block;
+				@include rem(font-size, 16px);
+			}
+		}
+	}
+	&__button {
+		display: block;
+		text-align: center;
+		background: $colorPink;
+		color: #fff;
+		font-family: "Fredoka One",cursive;
+		width: 100%;
+		border-radius: 5px;
+		letter-spacing: 2px;
+		@include rem(height, 50px);
+		@include rem(line-height, 50px);
+		@include rem(font-size, 20px);
+		@include rem(margin-top, 50px);
+	}
+}
+
+.l-atr {
+	&__wrapper {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: flex-start;
+		flex-direction: column;
+		&-title {
+			display: block;
+			color: indigo;
+			font-family: "Fredoka One",cursive;
+			text-align: left;
+			@include rem(padding-bottom, 30px);
+			@include rem(font-size, 20px);
+		}
+		.js--adt-wrapper-btn {
+			background: #ecb100;
+			font-family: "Fredoka One",cursive;
+			color: #fff;
+			text-transform: uppercase;
+			cursor: pointer;
+			outline: none;
+			max-width: 40%;
+			width: 100%;
+			margin: 40px auto 30px;
+			letter-spacing: 1px;
+			@include rem(font-size, 14px);
+			@include rem(height, 40px);
+			@include rem(line-height, 40px);
+		}
+		p {
+			display: block;
+			text-align: left;
+			@include rem(font-size, 14px);
+			@include rem(line-height, 40px);
+		}
+	}
+}

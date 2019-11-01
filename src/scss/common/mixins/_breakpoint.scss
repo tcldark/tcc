@@ -1,0 +1,55 @@
+@mixin breakpoint($point, $value: 0) {
+    @if $point == iphone {
+        @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71) and (orientation:portrait) {
+            @content;
+        }
+    }
+
+    @else if $point == mobile {
+        @media only screen
+        and (min-width : 100px)
+        and (max-width: 1080px)
+        { @content; }
+    }
+
+    @else if $point == tablet {
+        @media only screen
+        and (min-width : 761px)
+        and (max-width : 1080px)
+        { @content; }
+    }
+
+    @else if $point == desktop {
+        @media only screen
+        and (min-width : 1081px)
+        and (max-width : 1727px)
+        { @content; }
+
+    }
+    @else if $point == bigdesktop {
+        @media only screen
+        and (min-width : 1728px)
+        and (max-width : 5000px)
+        { @content; }
+
+    }
+
+    @else if $point == notMobile {
+        @media only screen
+        and (min-width : 761px)
+        { @content; }
+
+    }
+
+    @else {
+        @media only screen
+        and ($point: $value)
+        { @content; }
+    }
+}
+
+@mixin between-breakpoints($min, $max) {
+    @media (min-width: $min) and (max-width: $max) {
+        @content;
+    }
+}

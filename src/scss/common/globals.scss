@@ -1,0 +1,77 @@
+@import "./mixins/_index";
+@import "./base/_index";
+
+$font-main: 'Montserrat', sans-serif;
+$fontTitle: 'Fredoka One', cursive;;
+$colorMain: #1E90FF;
+$colorPink: #A52A2A;
+
+* {
+	font-family: $font-main;
+}
+
+.is--title {
+	font-family: $fontTitle;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+html {
+	&.no-scroll {
+		overflow: hidden;
+	}
+}
+
+body {
+	&.no-scroll {
+		overflow: hidden;
+		main {
+			@include breakpoint('mobile') {
+				position: fixed;
+				width: 0;
+				height: 0;
+			}
+		}
+	}
+}
+
+.is-desktop {
+	@include breakpoint('mobile') {
+		display: none!important;
+	}
+}
+
+.is--mobile {
+	display: none!important;
+	@include breakpoint('mobile') {
+		display: block!important;
+	}
+}
+
+input,
+select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	box-shadow: none;
+	text-shadow: none;
+	border-radius: 0;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='tel']:focus,
+input[type='number']:focus,
+textarea:focus {
+	font-size: 16px;
+}
+
+/* disable auto-zoom on iphone input field focus */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	select:focus,
+	textarea:focus,
+	input:focus {
+		font-size: 16px;
+	}
+}
